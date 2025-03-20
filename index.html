@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores para Mich💛🌼</title>
+    <style>
+        body {
+            background-color: #fff8dc;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            color: #5a3e36;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;
+            position: relative;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            width: 70%;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            color: #d4a017;
+        }
+        p {
+            font-size: 18px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #ffcc00;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .hidden-image {
+            display: none;
+            margin-top: 20px;
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .envelope-button {
+            background-color: #d4a017;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .envelope-button::before {
+            content: '✉️ ';
+        }
+        /* Contenedor de flores */
+        .flowers-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* Estilos de las flores */
+        .falling-flower {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://cdn3d.iconscout.com/3d/premium/thumb/flower-3d-icon-download-in-png-blend-fbx-gltf-file-formats--nature-autumn-plant-blossom-thanksgiving-vol-2-pack-icons-7812700.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.9;
+            animation: fall linear infinite;
+        }
+
+        /* Animación para la caída de las flores */
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌼 Rinconcito para Mich 🌼</h1>
+        <p>Un espacio donde las palabras florecen como pétalos al viento.</p>
+        <div class="buttons">
+            <button class="button" onclick="alert('Este es un detallito para ti 🌻')">Saludar</button>
+            <button class="envelope-button" onclick="toggleImage()">Para ti</button>
+        </div>
+        <img id="hiddenDrawing" class="hidden-image" src="https://imgmedia.libero.pe/652x871/libero/original/2024/03/20/65fb2fb911bb376bf307ac1e.webp" alt="Dibujo de flores amarillas">
+    </div>
+
+    <!-- Música de fondo con loop -->
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/dqnDRGsb1Zs?autoplay=1&loop=1&playlist=dqnDRGsb1Zs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <script>
+        function toggleImage() {
+            let img = document.getElementById('hiddenDrawing');
+            img.style.display = (img.style.display === 'block') ? 'none' : 'block';
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.querySelector('.flowers-container');
+
+            if (!container) {
+                console.error("Error: No se encontró el contenedor de flores en el HTML.");
+                return;
+            }
+
+            function createFallingFlower() {
+                const flower = document.createElement('div');
+                flower.classList.add('falling-flower');
+                container.appendChild(flower);
+
+                let startPosX = Math.random() * window.innerWidth;
+                flower.style.left = `${startPosX}px`;
+                flower.style.top = `-50px`;
+
+                let size = Math.random() * 30 + 30;
+                flower.style.width = `${size}px`;
+                flower.style.height = `${size}px`;
+
+                let fallSpeed = 5 + Math.random() * 5;
+                let rotateSpeed = (Math.random() - 0.5) * 360;
+
+                flower.style.animation = `fall ${fallSpeed}s linear forwards`;
+                flower.style.transform = `rotate(${rotateSpeed}deg)`;
+
+                setTimeout(() => {
+                    flower.remove();
+                }, fallSpeed * 1000);
+            }
+
+            setInterval(createFallingFlower, 500);
+        });
+    </script>
+
+    <!-- Contenedor de flores -->
+    <div class="flowers-container"></div>
+</body>
+</html>
