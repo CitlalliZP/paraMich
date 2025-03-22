@@ -140,10 +140,18 @@ siempre habrá alguien que piense en ti.
 </audio>
 
     <script>
+const audio = new Audio("flores-amarillas.mp3");
+audio.loop = true;
         function toggleImage() {
-            let img = document.getElementById('hiddenDrawing');
-            img.style.display = (img.style.display === 'block') ? 'none' : 'block';
-        }
+    let img = document.getElementById('hiddenDrawing');
+    let isVisible = img.style.display === 'block';
+
+    img.style.display = isVisible ? 'none' : 'block';
+
+    if (!isVisible) {
+        audio.play();
+    }
+}
 
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.querySelector('.flowers-container');
